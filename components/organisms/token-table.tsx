@@ -199,15 +199,15 @@ export const TokenTable = memo(function TokenTable({ tokens, loading, error }: T
                 ? Array.from({ length: 7 }).map((_, index) => (
                     <TableRow
                       key={`skeleton-${index}`}
-                      className="border-b border-[#2a2a2a] hover:bg-[#0f0f0f]"
+                      className="border-b border-[#2a2a2a] hover:bg-[#0f0f0f] animate-pulse"
                       style={{ height: "88px" }}
                     >
                       <td className="py-2 pl-4" style={{ width: "300px", minWidth: "300px", maxWidth: "300px" }}>
                         <div className="flex items-center gap-3">
-                          <Skeleton className="w-12 h-12 rounded-lg bg-[#1a1a1a]" />
-                          <div>
-                            <Skeleton className="w-20 h-4 mb-1 bg-[#1a1a1a]" />
-                            <Skeleton className="w-16 h-3 bg-[#1a1a1a]" />
+                          <Skeleton className="w-12 h-12 rounded-lg bg-[#1a1a1a] animate-pulse" />
+                          <div className="space-y-2">
+                            <Skeleton className="w-20 h-4 bg-[#1a1a1a] animate-pulse" />
+                            <Skeleton className="w-16 h-3 bg-[#1a1a1a] animate-pulse" />
                           </div>
                         </div>
                       </td>
@@ -215,37 +215,47 @@ export const TokenTable = memo(function TokenTable({ tokens, loading, error }: T
                         className="py-2 pr-4 text-right"
                         style={{ width: "140px", minWidth: "140px", maxWidth: "140px" }}
                       >
-                        <Skeleton className="w-16 h-4 bg-[#1a1a1a] ml-auto" />
+                        <div className="space-y-1">
+                          <Skeleton className="w-16 h-4 bg-[#1a1a1a] ml-auto animate-pulse" />
+                          <Skeleton className="w-12 h-3 bg-[#1a1a1a] ml-auto animate-pulse" />
+                        </div>
                       </td>
                       <td
                         className="py-2 pr-4 text-right hidden sm:table-cell"
                         style={{ width: "140px", minWidth: "140px", maxWidth: "140px" }}
                       >
-                        <Skeleton className="w-16 h-4 bg-[#1a1a1a] ml-auto" />
+                        <Skeleton className="w-16 h-4 bg-[#1a1a1a] ml-auto animate-pulse" />
                       </td>
                       <td
                         className="py-2 pr-4 text-right"
                         style={{ width: "140px", minWidth: "140px", maxWidth: "140px" }}
                       >
-                        <Skeleton className="w-16 h-4 bg-[#1a1a1a] ml-auto" />
+                        <Skeleton className="w-16 h-4 bg-[#1a1a1a] ml-auto animate-pulse" />
                       </td>
                       <td
                         className="py-2 pr-4 text-right hidden lg:table-cell"
                         style={{ width: "140px", minWidth: "140px", maxWidth: "140px" }}
                       >
-                        <Skeleton className="w-16 h-4 bg-[#1a1a1a] ml-auto" />
+                        <div className="space-y-1">
+                          <Skeleton className="w-12 h-4 bg-[#1a1a1a] ml-auto animate-pulse" />
+                          <Skeleton className="w-16 h-3 bg-[#1a1a1a] ml-auto animate-pulse" />
+                        </div>
                       </td>
                       <td
                         className="py-2 text-center hidden lg:table-cell"
                         style={{ width: "140px", minWidth: "140px", maxWidth: "140px" }}
                       >
-                        <Skeleton className="w-16 h-4 bg-[#1a1a1a] mx-auto" />
+                        <div className="space-y-1">
+                          <Skeleton className="w-12 h-4 bg-[#1a1a1a] mx-auto animate-pulse" />
+                          <Skeleton className="w-16 h-2 bg-[#1a1a1a] mx-auto animate-pulse" />
+                          <Skeleton className="w-8 h-3 bg-[#1a1a1a] mx-auto animate-pulse" />
+                        </div>
                       </td>
                       <td
                         className="py-2 px-4 text-center"
                         style={{ width: "120px", minWidth: "120px", maxWidth: "120px" }}
                       >
-                        <Skeleton className="w-16 h-4 bg-[#1a1a1a] mx-auto" />
+                        <Skeleton className="w-16 h-8 bg-[#1a1a1a] mx-auto rounded-lg animate-pulse" />
                       </td>
                     </TableRow>
                   ))
