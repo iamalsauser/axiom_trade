@@ -1,60 +1,29 @@
-import React from 'react';
-import { TokenLogo } from '../atoms/token-logo';
-import { TokenBadge } from '../atoms/token-badges';
+"use client"
+
+import { TokenLogo } from "@/components/atoms/token-logo"
+import { TokenBadges } from "@/components/atoms/token-badges"
+import type { Token } from "@/types/token"
+import { memo } from "react"
 
 interface TokenInfoProps {
-  logo: string;
-  name: string;
-  symbol: string;
-  badges?: Array<'verified' | 'new' | 'trending' | 'hot' | 'launching'>;
-  size?: 'sm' | 'md' | 'lg';
-  className?: string;
+  token: Token
 }
 
-export const TokenInfo: React.FC<TokenInfoProps> = ({ 
-  logo, 
-  name, 
-  symbol, 
-  badges = [],
-  size = 'md',
-  className = '' 
-}) => {
-  const getLogoSize = () => {
-    switch (size) {
-      case 'sm': return 24;
-      case 'lg': return 48;
-      default: return 32;
-    }
-  };
-
-  const getTextSize = () => {
-    switch (size) {
-      case 'sm': return 'text-xs';
-      case 'lg': return 'text-lg';
-      default: return 'text-sm';
-    }
-  };
-
+export const TokenInfo = memo(function TokenInfo({ token }: TokenInfoProps) {
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
-      <TokenLogo 
-        src={logo} 
-        alt={`${name} logo`} 
-        size={getLogoSize()} 
-      />
-      <div className="flex flex-col min-w-0">
-        <div className="flex items-center gap-2">
-          <span className={`font-medium text-gray-900 truncate ${getTextSize()}`}>
-            {name}
-          </span>
-          {badges.map((badge, index) => (
-            <TokenBadge key={index} type={badge} />
-          ))}
+    <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+      <TokenLogo src={token.logo} alt={token.name} chain={token.chain} />
+      <div className="flex flex-col min-w-0 flex-1">
+        <div className="flex items-center gap-1 sm:gap-2">
+          <span className="font-semibold text-white text-sm truncate">{token.symbol}</span>
+          <span className="text-[#888888] text-sm truncate hidden sm:inline">{token.name}</span>
+          <div className="w-3 h-3 bg-[#888888] rounded-sm flex-shrink-0"></div>
         </div>
-        <span className="text-xs text-gray-500 font-mono">
-          {symbol}
-        </span>
+        <div className="flex items-center gap-1 mt-1">
+          <span className="text-[#888888] text-xs">{token.age || "4mo"}</span>
+          <TokenBadges badges={token.badges} />
+        </div>
       </div>
     </div>
-  );
-};
+  )
+})

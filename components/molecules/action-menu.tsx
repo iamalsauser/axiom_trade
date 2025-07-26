@@ -1,85 +1,46 @@
-import React, { useState, useRef, useEffect } from 'react';
+"use client"
 
-interface ActionMenuItem {
-  id: string;
-  label: string;
-  icon?: string;
-  onClick: () => void;
-  disabled?: boolean;
-  variant?: 'default' | 'danger';
-}
+import { Button } from "@/components/ui/button"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import type { Token } from "@/types/token"
+import { MoreHorizontal, TrendingUp, Heart, Share2, Info } from "lucide-react"
+import { memo } from "react"
 
 interface ActionMenuProps {
-  items: ActionMenuItem[];
-  trigger: React.ReactNode;
-  className?: string;
-  align?: 'left' | 'right';
+  token: Token
 }
 
-export const ActionMenu: React.FC<ActionMenuProps> = ({ 
-  items, 
-  trigger, 
-  className = '',
-  align = 'right'
-}) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  const handleItemClick = (item: ActionMenuItem) => {
-    if (!item.disabled) {
-      item.onClick();
-      setIsOpen(false);
-    }
-  };
-
+export const ActionMenu = memo(function ActionMenu({ token }: ActionMenuProps) {
   return (
-    <div className={`relative inline-block ${className}`} ref={menuRef}>
-      <div onClick={() => setIsOpen(!isOpen)}>
-        {trigger}
-      </div>
-      
-      {isOpen && (
-        <div className={`
-          absolute z-50 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5
-          ${align === 'left' ? 'left-0' : 'right-0'}
-        `}>
-          <div className="py-1" role="menu">
-            {items.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleItemClick(item)}
-                disabled={item.disabled}
-                className={`
-                  block w-full text-left px-4 py-2 text-sm
-                  ${item.disabled 
-                    ? 'text-gray-400 cursor-not-allowed' 
-                    : item.variant === 'danger'
-                    ? 'text-red-700 hover:bg-red-50'
-                    : 'text-gray-700 hover:bg-gray-100'
-                  }
-                `}
-                role="menuitem"
-              >
-                <div className="flex items-center gap-2">
-                  {item.icon && <span>{item.icon}</span>}
-                  {item.label}
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
+    <div className="flex items-center gap-2">
+      <Button size="sm" className="bg-[#00ff88] hover:bg-[#00dd77] text-black font-semibold">
+        Trade
+      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="sm" className="text-[#888888] hover:text-white">
+            <MoreHorizontal className="w-4 h-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="bg-[#1a1a1a] border-[#2a2a2a]" align="end">
+          <DropdownMenuItem className="text-white hover:bg-[#2a2a2a]">
+            <TrendingUp className="w-4 h-4 mr-2" />
+            View Chart
+          </DropdownMenuItem>
+          <DropdownMenuItem className="text-white hover:bg-[#2a2a2a]">
+            <Heart className="w-4 h-4 mr-2" />
+            Add to Favorites
+          </DropdownMenuItem>
+          <DropdownMenuItem className="text-white hover:bg-[#2a2a2a]">
+            <Share2 className="w-4 h-4 mr-2" />
+            Share
+          </DropdownMenuItem>
+          <DropdownMenuItem className="text-white hover:bg-[#2a2a2a]">
+            <Info className="w-4 h-4 mr-2" />
+            Token Info
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
-  );
-};
+  )
+})

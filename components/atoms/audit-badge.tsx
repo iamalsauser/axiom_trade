@@ -1,42 +1,43 @@
-import React from 'react';
+"use client"
+
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { memo } from "react"
+import { cn } from "@/lib/utils"
 
 interface AuditBadgeProps {
-  score?: number;
-  status?: 'verified' | 'pending' | 'failed';
-  className?: string;
+  score: number
 }
 
-export const AuditBadge: React.FC<AuditBadgeProps> = ({ 
-  score, 
-  status = 'pending', 
-  className = '' 
-}) => {
-  const getStatusColor = () => {
-    switch (status) {
-      case 'verified':
-        return 'bg-green-100 text-green-800 border-green-200';
-      case 'failed':
-        return 'bg-red-100 text-red-800 border-red-200';
-      default:
-        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-    }
-  };
+export const AuditBadge = memo(function AuditBadge({ score }: AuditBadgeProps) {
+  const getScoreColor = (score: number) => {
+    if (score >= 80) return "bg-[#00ff88] text-black"
+    if (score >= 60) return "bg-yellow-500 text-black"
+    return "bg-[#ff4444] text-white"
+  }
 
-  const getStatusText = () => {
-    switch (status) {
-      case 'verified':
-        return 'Verified';
-      case 'failed':
-        return 'Failed';
-      default:
-        return 'Pending';
-    }
-  };
+  const getScoreLabel = (score: number) => {
+    if (score >= 80) return "High"
+    if (score >= 60) return "Medium"
+    return "Low"
+  }
 
   return (
-    <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border ${getStatusColor()} ${className}`}>
-      <span className="w-1.5 h-1.5 rounded-full bg-current"></span>
-      {score ? `${getStatusText()} (${score})` : getStatusText()}
-    </div>
-  );
-};
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div
+            className={cn(
+              "inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold cursor-help",
+              getScoreColor(score),
+            )}
+          >
+            {getScoreLabel(score)}
+          </div>
+        </TooltipTrigger>
+        <TooltipContent className="bg-[#2a2a2a] border-[#444444] text-white">
+          <p>Audit Score: {score}/100</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  )
+})

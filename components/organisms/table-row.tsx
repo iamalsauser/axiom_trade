@@ -1,128 +1,70 @@
-import React from 'react';
-import { TokenInfo } from '../molecules/token-info';
-import { PriceChange } from '../atoms/price-change';
-import { MarketCapCell } from '../molecules/market-cap-cell';
-import { VolumeCell } from '../molecules/volume-cell';
-import { TransactionCell } from '../molecules/transaction-cell';
-import { AuditCell } from '../molecules/audit-cell';
-import { ActionButton } from '../molecules/action-button';
-import { ActionMenu } from '../molecules/action-menu';
+"use client"
 
-interface Token {
-  id: string;
-  name: string;
-  symbol: string;
-  logo: string;
-  price: number;
-  change24h: number;
-  marketCap: number;
-  volume: number;
-  transactions: number;
-  auditScore?: number;
-  auditStatus?: 'verified' | 'pending' | 'failed';
-  lastAuditDate?: string;
-  badges?: Array<'verified' | 'new' | 'trending' | 'hot' | 'launching'>;
+import { TableCell, TableRow } from "@/components/ui/table"
+import { TokenInfo } from "@/components/molecules/token-info"
+import { MarketCapCell } from "@/components/molecules/market-cap-cell"
+import { VolumeCell } from "@/components/molecules/volume-cell"
+import { ActionButton } from "@/components/molecules/action-button"
+import { AuditCell } from "@/components/molecules/audit-cell"
+import { TransactionCell } from "@/components/molecules/transaction-cell"
+import type { Token } from "@/types/token"
+import { memo } from "react"
+import { formatNumber } from "@/lib/utils"
+
+interface TableRowComponentProps {
+  token: Token
 }
 
-interface TableRowProps {
-  token: Token;
-  onTrade: (token: Token) => void;
-  onWatchlist: (token: Token) => void;
-  className?: string;
-}
-
-export const TableRow: React.FC<TableRowProps> = ({ 
-  token, 
-  onTrade, 
-  onWatchlist,
-  className = '' 
-}) => {
-  const actionMenuItems = [
-    {
-      id: 'trade',
-      label: 'Trade',
-      icon: '💱',
-      onClick: () => onTrade(token)
-    },
-    {
-      id: 'watchlist',
-      label: 'Add to Watchlist',
-      icon: '👁️',
-      onClick: () => onWatchlist(token)
-    },
-    {
-      id: 'chart',
-      label: 'View Chart',
-      icon: '📈',
-      onClick: () => console.log('View chart for', token.symbol)
-    },
-    {
-      id: 'info',
-      label: 'Token Info',
-      icon: 'ℹ️',
-      onClick: () => console.log('Token info for', token.symbol)
-    }
-  ];
-
+export const TableRowComponent = memo(function TableRowComponent({ token }: TableRowComponentProps) {
   return (
-    <tr className={`border-t border-gray-100 hover:bg-gray-50 transition-colors ${className}`}>
-      {/* Token Info */}
-      <td className="px-4 py-3">
-        <TokenInfo
-          logo={token.logo}
-          name={token.name}
-          symbol={token.symbol}
-          badges={token.badges}
+    <TableRow className="border-b border-[#2a2a2a] hover:bg-[#0f0f0f] transition-colors h-[88px]">
+      {/* Column 1: Pair Info - 300px */}
+      <TableCell className="py-2 pl-4" style={{ width: "300px", minWidth: "300px", maxWidth: "300px" }}>
+        <TokenInfo token={token} />
+      </TableCell>
+
+      {/* Column 2: Market Cap - 140px */}
+      <TableCell className="py-2 pr-4 text-right" style={{ width: "140px", minWidth: "140px", maxWidth: "140px" }}>
+        <MarketCapCell marketCap={token.marketCap} change={token.priceChange24h} />
+      </TableCell>
+
+      {/* Column 3: Liquidity - 140px - Hidden on mobile */}
+      <TableCell
+        className="py-2 pr-4 text-right hidden sm:table-cell"
+        style={{ width: "140px", minWidth: "140px", maxWidth: "140px" }}
+      >
+        <div className="font-mono text-sm text-white">${formatNumber(token.liquidity)}</div>
+      </TableCell>
+
+      {/* Column 4: Volume - 140px */}
+      <TableCell className="py-2 pr-4 text-right" style={{ width: "140px", minWidth: "140px", maxWidth: "140px" }}>
+        <VolumeCell volume={token.volume24h} />
+      </TableCell>
+
+      {/* Column 5: TXNS - 140px - Hidden on mobile and tablet */}
+      <TableCell
+        className="py-2 pr-4 text-right hidden lg:table-cell"
+        style={{ width: "140px", minWidth: "140px", maxWidth: "140px" }}
+      >
+        <TransactionCell
+          transactions={token.transactions24h}
+          buyTransactions={token.buyTransactions}
+          sellTransactions={token.sellTransactions}
         />
-      </td>
+      </TableCell>
 
-      {/* Price */}
-      <td className="px-4 py-3 text-right">
-        <span className="font-mono text-sm font-medium">
-          ${token.price.toFixed(6)}
-        </span>
-      </td>
+      {/* Column 6: Audit Log - 140px - Hidden on mobile and tablet */}
+      <TableCell
+        className="py-2 text-center hidden lg:table-cell"
+        style={{ width: "140px", minWidth: "140px", maxWidth: "140px" }}
+      >
+        <AuditCell score={token.auditScore} percentage={token.auditPercentage} paid={token.auditPaid} />
+      </TableCell>
 
-      {/* 24h Change */}
-      <td className="px-4 py-3 text-right">
-        <PriceChange value={token.change24h} />
-      </td>
-
-      {/* Market Cap */}
-      <td className="px-4 py-3 text-right">
-        <MarketCapCell value={token.marketCap} />
-      </td>
-
-      {/* Volume */}
-      <td className="px-4 py-3 text-right">
-        <VolumeCell value={token.volume} />
-      </td>
-
-      {/* Transactions */}
-      <td className="px-4 py-3 text-right">
-        <TransactionCell count={token.transactions} />
-      </td>
-
-      {/* Audit */}
-      <td className="px-4 py-3 text-center">
-        <AuditCell
-          score={token.auditScore}
-          status={token.auditStatus}
-          lastAuditDate={token.lastAuditDate}
-        />
-      </td>
-
-      {/* Actions */}
-      <td className="px-4 py-3 text-center">
-        <ActionMenu
-          items={actionMenuItems}
-          trigger={
-            <ActionButton variant="outline" size="sm">
-              Actions
-            </ActionButton>
-          }
-        />
-      </td>
-    </tr>
-  );
-};
+      {/* Column 7: Action - 120px */}
+      <TableCell className="py-2 px-4 text-center" style={{ width: "120px", minWidth: "120px", maxWidth: "120px" }}>
+        <ActionButton />
+      </TableCell>
+    </TableRow>
+  )
+})

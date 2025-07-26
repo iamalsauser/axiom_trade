@@ -1,71 +1,63 @@
-import React from 'react';
+"use client"
 
-interface TableHeaderProps {
-  onSort: (column: string) => void;
-  sortColumn: string;
-  sortOrder: 'asc' | 'desc';
-  className?: string;
+import { TableHead } from "@/components/ui/table"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import type { SortConfig } from "@/types/token"
+import { ChevronDown, ChevronUp } from "lucide-react"
+import { memo } from "react"
+import { cn } from "@/lib/utils"
+
+interface TableHeaderComponentProps {
+  title: string
+  sortKey: string
+  sortConfig: SortConfig
+  onSort: (key: string) => void
+  tooltip: string
+  className?: string
 }
 
-export const TableHeader: React.FC<TableHeaderProps> = ({ 
-  onSort, 
-  sortColumn, 
-  sortOrder,
-  className = '' 
-}) => {
-  const columns = [
-    { key: 'token', label: 'Token', sortable: false, width: 'w-64' },
-    { key: 'price', label: 'Price', sortable: true, width: 'w-32' },
-    { key: 'change24h', label: '24h Change', sortable: true, width: 'w-32' },
-    { key: 'marketCap', label: 'Market Cap', sortable: true, width: 'w-40' },
-    { key: 'volume', label: 'Volume', sortable: true, width: 'w-40' },
-    { key: 'transactions', label: 'Transactions', sortable: true, width: 'w-32' },
-    { key: 'audit', label: 'Audit', sortable: false, width: 'w-24' },
-    { key: 'actions', label: 'Actions', sortable: false, width: 'w-24' },
-  ];
-
-  const getSortIcon = (columnKey: string) => {
-    if (sortColumn !== columnKey) {
-      return (
-        <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-        </svg>
-      );
-    }
-    
-    return sortOrder === 'asc' ? (
-      <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-      </svg>
-    ) : (
-      <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-      </svg>
-    );
-  };
+export const TableHeaderComponent = memo(function TableHeaderComponent({
+  title,
+  sortKey,
+  sortConfig,
+  onSort,
+  tooltip,
+  className,
+}: TableHeaderComponentProps) {
+  const isActive = sortConfig.key === sortKey
+  const isAsc = isActive && sortConfig.direction === "asc"
 
   return (
-    <thead className={`bg-gray-50 ${className}`}>
-      <tr>
-        {columns.map((column) => (
-          <th
-            key={column.key}
-            className={`
-              ${column.width} px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider
-              ${column.sortable 
-                ? 'cursor-pointer hover:bg-gray-100 select-none' 
-                : 'cursor-default'
-              }
-            `}
-            onClick={() => column.sortable && onSort(column.key)}
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <TableHead
+            className={cn(
+              "text-[#888888] font-semibold cursor-pointer hover:text-white transition-colors select-none",
+              className,
+            )}
+            onClick={() => onSort(sortKey)}
           >
-            <div className="flex items-center gap-2">
-              <span>{column.label}</span>
-              {column.sortable && getSortIcon(column.key)}
+            <div className="flex items-center gap-1">
+              {title}
+              <div className="flex flex-col">
+                <ChevronUp
+                  className={cn("w-3 h-3 transition-colors", isActive && isAsc ? "text-white" : "text-[#444444]")}
+                />
+                <ChevronDown
+                  className={cn(
+                    "w-3 h-3 -mt-1 transition-colors",
+                    isActive && !isAsc ? "text-white" : "text-[#444444]",
+                  )}
+                />
+              </div>
             </div>
-          </th>
-        ))}
-      </tr>
-    </thead>
-  );
-};
+          </TableHead>
+        </TooltipTrigger>
+        <TooltipContent className="bg-[#2a2a2a] border-[#444444] text-white">
+          <p>{tooltip}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  )
+})

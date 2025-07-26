@@ -19,4 +19,4 @@ export function formatNumber(num: number): string {
     return (num / 1e3).toFixed(1) + "K"
   }
   return num.toFixed(2)
-} 
+}
