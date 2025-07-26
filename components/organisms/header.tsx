@@ -1,15 +1,40 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Search, Star, Bell, MessageSquare, ChevronDown, User, Menu } from "lucide-react"
+import { Search, Star, Bell, MessageSquare, ChevronDown, User, Menu, X } from "lucide-react"
 import { memo, useState } from "react"
 import Image from "next/image"
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog"
+import { PulseInterface } from "@/components/pulse-interface"
 
 export const Header = memo(function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [pulseOpen, setPulseOpen] = useState(false)
+
+  const handlePulseClick = () => {
+    console.log('Pulse button clicked!')
+    setPulseOpen(true)
+    console.log('Pulse modal state:', true)
+  }
+
+  console.log('Header rendering, pulseOpen:', pulseOpen)
 
   return (
     <header className="bg-[#0a0a0a] border-b border-[#2a2a2a] flex flex-row w-full h-[64px] min-h-[64px] px-[12px] sm:px-[24px] gap-[12px] sm:gap-[24px] justify-between items-center">
+      <Dialog open={pulseOpen} onOpenChange={setPulseOpen}>
+        <DialogContent className="w-full max-w-none h-full p-0 bg-[#0a0a0a] border-0 rounded-none flex flex-col">
+          <DialogTitle className="sr-only">Pulse</DialogTitle>
+          <DialogDescription className="sr-only">Axiom Pulse interface modal</DialogDescription>
+          <div className="flex justify-end p-4">
+            <button onClick={() => setPulseOpen(false)} className="text-[#888888] hover:text-white focus:outline-none">
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+          <div className="flex-1 overflow-auto">
+            <PulseInterface />
+          </div>
+        </DialogContent>
+      </Dialog>
       <div className="flex items-center justify-between w-full max-w-[1470px] mx-auto">
         {/* Left side - Logo and Navigation */}
         <div className="flex items-center gap-4 sm:gap-8">
@@ -49,12 +74,13 @@ export const Header = memo(function Header() {
             >
               Discover
             </a>
-            <a
-              href="#pulse"
-              className="text-[#888888] text-sm font-medium hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded-sm px-1 py-1"
+            <button
+              type="button"
+              onClick={handlePulseClick}
+              className="text-[#888888] text-sm font-bold hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded-sm px-1 py-1 bg-blue-500/10 hover:bg-blue-500/20"
             >
               Pulse
-            </a>
+            </button>
             <a
               href="#trackers"
               className="text-[#888888] text-sm font-medium hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded-sm px-1 py-1"
@@ -174,12 +200,13 @@ export const Header = memo(function Header() {
             >
               Discover
             </a>
-            <a
-              href="#pulse"
-              className="text-[#888888] text-sm font-medium hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded-sm px-2 py-2"
+            <button
+              type="button"
+              onClick={handlePulseClick}
+              className="text-[#888888] text-sm font-bold hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded-sm px-2 py-2 bg-blue-500/10 hover:bg-blue-500/20"
             >
               Pulse
-            </a>
+            </button>
             <a
               href="#trackers"
               className="text-[#888888] text-sm font-medium hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded-sm px-2 py-2"

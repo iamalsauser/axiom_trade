@@ -94,7 +94,7 @@ const nextConfig = {
   reactStrictMode: true,
   
   // SWC minification
-  swcMinify: true,
+  //swcMinify: true,
   
   // ESLint configuration
   eslint: {
