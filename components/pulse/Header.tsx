@@ -8,6 +8,8 @@ export default function Header() {
     const NAV_ITEMS = [
   "Discover", "Pulse", "Trackers", "Perpetuals", "Yield", "Portfolio", "Rewards"
 ];
+    const [activeNav, setActiveNav] = React.useState("Pulse");
+    const [activeControl, setActiveControl] = React.useState<string | null>(null);
     useEffect(() => {
 console.log("Header component mounted");
 
@@ -28,17 +30,14 @@ console.log("Header component mounted");
             {/* Navigation – scrollable if overflow */}
             <nav className="hidden md:flex items-center min-w-0 ml-6 space-x-3 sm:space-x-4 lg:space-x-6 overflow-x-auto">
               {NAV_ITEMS.map((item) => (
-                <a
+                <button
                   key={item}
-                  href="#"
-                  className={`text-sm lg:text-base truncate whitespace-nowrap transition-colors
-                    ${item === "Pulse" 
-                      ? "text-blue-400 font-medium hover:text-blue-300" 
-                      : "text-gray-300 hover:text-white"}
-                  `}
+                  type="button"
+                  onClick={() => setActiveNav(item)}
+                  className={`text-sm lg:text-base truncate whitespace-nowrap transition-colors px-2 py-1 rounded focus:outline-none ${activeNav === item ? 'bg-[#3B82F6] text-white font-medium' : 'text-gray-300 hover:text-white'}`}
                 >
                   {item}
-                </a>
+                </button>
               ))}
             </nav>
           </div>
@@ -64,29 +63,20 @@ console.log("Header component mounted");
 
             {/* Icon Cluster */}
             <div className="flex items-center space-x-2 sm:space-x-2.5 lg:space-x-3 flex-shrink-0">
-              {/* Star */}
-              <button className="p-1 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors flex-shrink-0">
-                <Star className="w-5 h-5" />
-              </button>
-              {/* Bell */}
-              <button className="p-1 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors flex-shrink-0">
-                <Bell className="w-5 h-5" />
-              </button>
-              {/* Message (with badge) */}
-              <button className="relative p-1 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors flex-shrink-0">
-                <MessageSquare className="w-5 h-5" />
-                <span className="absolute -top-1 -right-1 bg-gray-600 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-semibold leading-none">0</span>
-              </button>
-              {/* Portfolio (gray circle with 0) */}
-              <button className="relative p-0.5 flex items-center justify-center text-gray-400 hover:text-white transition-colors flex-shrink-0">
-                <div className="w-5 h-5 bg-gray-600 rounded-full flex items-center justify-center">
-                  <span className="text-[10px] leading-none font-semibold text-white">0</span>
-                </div>
-              </button>
-              {/* User */}
-              <button className="p-1 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors flex-shrink-0">
-                <User className="w-5 h-5" />
-              </button>
+              {["Star", "Bell", "MessageSquare", "Portfolio", "User"].map((icon, idx) => (
+                <button
+                  key={icon}
+                  type="button"
+                  onClick={() => setActiveControl(icon)}
+                  className={`p-1 rounded transition-colors flex-shrink-0 focus:outline-none ${activeControl === icon ? 'bg-[#3B82F6] text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800'}`}
+                >
+                  {icon === "Star" && <Star className="w-5 h-5" />}
+                  {icon === "Bell" && <Bell className="w-5 h-5" />}
+                  {icon === "MessageSquare" && <MessageSquare className="w-5 h-5" />}
+                  {icon === "Portfolio" && <div className="w-5 h-5 bg-gray-600 rounded-full flex items-center justify-center"><span className="text-[10px] leading-none font-semibold text-white">0</span></div>}
+                  {icon === "User" && <User className="w-5 h-5" />}
+                </button>
+              ))}
             </div>
           </div>
         </div>
@@ -96,26 +86,26 @@ console.log("Header component mounted");
       <div className="w-full flex justify-end px-8 py-2 bg-[#0A0A0A]">
         <div className="flex items-center space-x-3">
           {/* Display Dropdown */}
-          <div className="flex items-center space-x-2 bg-[#1A1A1A] rounded-lg px-3 py-2 cursor-pointer hover:bg-[#2A2A2A] transition-colors">
+          <button type="button" className="flex items-center space-x-2 bg-[#1A1A1A] rounded-lg px-3 py-2 cursor-pointer hover:bg-[#2A2A2A] transition-colors focus:outline-none">
             <span className="text-sm text-[#9CA3AF]">Display</span>
             <ChevronDown className="w-4 h-4 text-[#9CA3AF]" />
-          </div>
+          </button>
           
           {/* Volume Controls */}
-          <div className="flex items-center space-x-2 bg-[#1A1A1A] rounded-lg px-3 py-2 cursor-pointer hover:bg-[#2A2A2A] transition-colors">
+          <button type="button" className="flex items-center space-x-2 bg-[#1A1A1A] rounded-lg px-3 py-2 cursor-pointer hover:bg-[#2A2A2A] transition-colors focus:outline-none">
             <Volume2 className="w-4 h-4 text-[#9CA3AF] hover:text-white transition-colors" />
-          </div>
-          <div className="flex items-center space-x-2 bg-[#1A1A1A] rounded-lg px-3 py-2 cursor-pointer hover:bg-[#2A2A2A] transition-colors">
+          </button>
+          <button type="button" className="flex items-center space-x-2 bg-[#1A1A1A] rounded-lg px-3 py-2 cursor-pointer hover:bg-[#2A2A2A] transition-colors focus:outline-none">
             <VolumeX className="w-4 h-4 text-[#9CA3AF] hover:text-white transition-colors" />
-          </div>
+          </button>
           
           {/* Numerical Display */}
-          <div className="flex items-center space-x-2 bg-[#1A1A1A] rounded-lg px-3 py-2 cursor-pointer hover:bg-[#2A2A2A] transition-colors">
+          <button type="button" className="flex items-center space-x-2 bg-[#1A1A1A] rounded-lg px-3 py-2 cursor-pointer hover:bg-[#2A2A2A] transition-colors focus:outline-none">
             <span className="text-sm text-[#9CA3AF]">1</span>
             <span className="text-sm text-[#9CA3AF]">=</span>
             <span className="text-sm text-[#9CA3AF]">0</span>
             <ChevronDown className="w-4 h-4 text-[#9CA3AF]" />
-          </div>
+          </button>
         </div>
       </div>
     </div>

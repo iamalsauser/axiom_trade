@@ -94,32 +94,32 @@ export default function Footer() {
         {/* 1. PRESET SELECTOR */}
         <div className="flex items-center h-full pr-1 sm:pr-3 relative select-none min-w-[100px] sm:min-w-[130px] md:min-w-[160px] flex-shrink-0" ref={presetRef}>
           <button
-            className="flex items-center bg-[#2533A8] hover:bg-[#1a255e] text-[#B1C6FF] font-semibold text-[10px] sm:text-[11px] h-[26px] px-[8px] sm:px-[10px] rounded border-0 focus:outline-none focus:ring-0 active:border-0 focus:border-0 hover:border-0 border-transparent focus:border-transparent active:border-transparent"
+            className={`flex items-center font-semibold text-[10px] sm:text-[11px] h-[26px] px-[8px] sm:px-[10px] rounded border-0 focus:outline-none focus:ring-0 transition-colors ${showPresetDropdown ? 'bg-[#1976d2] text-white' : 'bg-[#2533A8] text-[#B1C6FF] hover:bg-[#1a255e]'}`}
             style={{ border: 'none', outline: 'none', boxShadow: 'none' }}
             onClick={() => setShowPresetDropdown((v) => !v)}
           >
-          <span className="flex items-center mr-1">
+            <span className="flex items-center mr-1">
               <svg width="14" height="14" className="sm:w-[16px] sm:h-[16px]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.07-7.07l-1.41 1.41M6.34 17.66l-1.41 1.41m12.02 0l-1.41-1.41M6.34 6.34L4.93 4.93"/>
-            </svg>
-          </span>
+              </svg>
+            </span>
             <span className="truncate hidden sm:inline">{selectedPreset}</span>
             <span className="truncate sm:hidden">P1</span>
             <ChevronDown className="w-3 h-3 ml-1" />
-        </button>
+          </button>
           {showPresetDropdown && (
             <div className="absolute left-0 top-[110%] mt-1 w-28 sm:w-32 md:w-36 bg-[#24292f] border border-[#292929] rounded overflow-hidden shadow-md z-50">
               {presetList.map((name) => (
-                <div
+                <button
                   key={name}
-                  className={`py-1 px-3 text-[10px] sm:text-[11px] cursor-pointer ${name === selectedPreset ? 'bg-[#1976d2] text-white font-bold' : 'hover:bg-[#222f52] text-[#cdcdcd]'}`}
+                  className={`w-full text-left py-1 px-3 text-[10px] sm:text-[11px] cursor-pointer transition-colors ${name === selectedPreset ? 'bg-[#1976d2] text-white font-bold' : 'hover:bg-[#222f52] text-[#cdcdcd]'}`}
                   onClick={() => {
                     setSelectedPreset(name);
                     setShowPresetDropdown(false);
                   }}
                 >
                   {name}
-                </div>
+                </button>
               ))}
             </div>
           )}
@@ -152,9 +152,9 @@ export default function Footer() {
           <span className="h-6 border-l border-[#23262F] mx-1 sm:mx-2"></span>
           
           {tabs.map((tab) => (
-            <div
+            <button
               key={tab.key}
-              className={`flex items-center px-1 sm:px-2 md:px-3 py-2 text-[10px] sm:text-[11px] cursor-pointer transition-colors min-w-fit flex-shrink-0 ${
+              className={`flex items-center px-1 sm:px-2 md:px-3 py-2 text-[10px] sm:text-[11px] cursor-pointer transition-colors min-w-fit flex-shrink-0 focus:outline-none ${
                 activeTab === tab.key
                   ? 'bg-[#2a2a2a] text-white font-medium rounded-t-md relative -top-[1px]'
                   : 'text-[#888] hover:text-white'
@@ -173,7 +173,7 @@ export default function Footer() {
                   onClick={e => { e.stopPropagation(); closeTab(tab.key); }}
                 />
               )}
-        </div>
+            </button>
           ))}
         </nav>
 
@@ -250,7 +250,7 @@ export default function Footer() {
           {/* Locale dropdown */}
           <div className="flex items-center ml-2 sm:ml-3 md:ml-6 relative select-none flex-shrink-0" ref={localeRef}>
             <button
-              className="flex items-center text-[#888] text-[10px] sm:text-[11px] uppercase hover:text-white transition"
+              className={`flex items-center text-[#888] text-[10px] sm:text-[11px] uppercase hover:text-white transition focus:outline-none ${showLocaleDropdown ? 'bg-[#1976d2] text-white' : ''}`}
               style={{ letterSpacing: "1px" }}
               onClick={() => setShowLocaleDropdown((v) => !v)}
             >
@@ -261,16 +261,16 @@ export default function Footer() {
             {showLocaleDropdown && (
               <div className="absolute right-0 mt-2 w-20 sm:w-24 bg-[#24292f] border border-[#292929] rounded shadow z-50">
                 {localeList.map(locale => (
-                  <div
+                  <button
                     key={locale}
-                    className={`py-1 px-2 sm:px-3 text-[10px] sm:text-[11px] cursor-pointer ${locale === selectedLocale ? 'bg-[#1976d2] text-white font-bold' : 'hover:bg-[#222f52] text-[#cdcdcd]'}`}
+                    className={`w-full text-left py-1 px-2 sm:px-3 text-[10px] sm:text-[11px] cursor-pointer transition-colors focus:outline-none ${locale === selectedLocale ? 'bg-[#1976d2] text-white font-bold' : 'hover:bg-[#222f52] text-[#cdcdcd]'}`}
                     onClick={() => {
                       setSelectedLocale(locale);
                       setShowLocaleDropdown(false);
                     }}
                   >
                     {locale}
-                  </div>
+                  </button>
                 ))}
               </div>
             )}
