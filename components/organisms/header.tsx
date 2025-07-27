@@ -6,18 +6,16 @@ import { memo, useState } from "react"
 import Image from "next/image"
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { PulseInterface } from "@/components/pulse-interface"
+import { useParams, useRouter } from "next/navigation"
+import { PathParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime"
 
 export const Header = memo(function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [pulseOpen, setPulseOpen] = useState(false)
 
   const handlePulseClick = () => {
-    console.log('Pulse button clicked!')
     setPulseOpen(true)
-    console.log('Pulse modal state:', true)
   }
-
-  console.log('Header rendering, pulseOpen:', pulseOpen)
 
   return (
     <header className="bg-[#0a0a0a] border-b border-[#2a2a2a] flex flex-row w-full h-[64px] min-h-[64px] px-[12px] sm:px-[24px] gap-[12px] sm:gap-[24px] justify-between items-center">
@@ -68,7 +66,7 @@ export const Header = memo(function Header() {
           {/* Desktop Navigation Menu */}
           <nav className="hidden sm:flex items-center gap-6" role="navigation" aria-label="Main navigation">
             <a
-              href="#discover"
+              href="/"
               className="text-[#6366f1] text-sm font-medium hover:text-[#5855eb] transition-colors focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded-sm px-1 py-1"
               aria-current="page"
             >
@@ -77,7 +75,7 @@ export const Header = memo(function Header() {
             <button
               type="button"
               onClick={handlePulseClick}
-              className="text-[#888888] text-sm font-bold hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded-sm px-1 py-1 bg-blue-500/10 hover:bg-blue-500/20"
+              className="text-[#888888] text-sm font-medium hover:text-[#5855eb] transition-colors focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded-sm px-1 py-1"
             >
               Pulse
             </button>
