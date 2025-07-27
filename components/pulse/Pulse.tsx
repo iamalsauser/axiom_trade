@@ -18,16 +18,16 @@ import NewPairsTokenCard from "./NewPairsTokenCard";
 const mockTokens = [
   {
     id: 1,
-    name: "TIAGO",
-    symbol: "tiago",
-    age: "3",
-    marketCap: 7000,
-    price: 5000,
+    name: "tiago",
+    symbol: "Lofi Girl's friend",
+    age: "16",
+    marketCap: 5000,
+    price: 2000,
     volume24h: 7000,
     transactions24h: 7,
-    priceChange24h: 16,
+    priceChange24h: -5,
     image:
-      "https://images.unsplash.com/photo-1494790108755-2616c40a6e45?w=100&h=100&fit=crop&crop=face",
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
   },
   {
     id: 2,
@@ -68,19 +68,7 @@ const mockTokens = [
     image:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
   },
-  {
-    id: 5,
-    name: "tiago",
-    symbol: "Lofi Girl's friend",
-    age: "16",
-    marketCap: 5000,
-    price: 2000,
-    volume24h: 7000,
-    transactions24h: 7,
-    priceChange24h: -5,
-    image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
-  },
+ 
 ];
 
 // --- Interfaces ---
