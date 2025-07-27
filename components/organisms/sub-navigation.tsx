@@ -22,6 +22,7 @@ export const SubNavigation = memo(function SubNavigation({
 }: SubNavigationProps) {
   const timeFilters = ["5m", "1h", "6h", "24h"]
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
+  const [selectedButton, setSelectedButton] = useState('1')
 
   return (
     <>
@@ -126,9 +127,9 @@ export const SubNavigation = memo(function SubNavigation({
 
               {/* P1 P2 P3 */}
               <div className="flex items-center gap-2 text-sm">
-                <span className="text-[#6366f1] font-medium">P1</span>
-                <span className="text-[#888888]">P2</span>
-                <span className="text-[#888888]">P3</span>
+                <button onClick={()=>setSelectedButton('1')} className={`${selectedButton == '1' ? "text-[#6366f1]" : "text-[#888888]"}  font-medium`}>P1</button>
+                <button onClick={()=>setSelectedButton('2')} className={`${selectedButton == '2' ? "text-[#6366f1]" : "text-[#888888]"}  font-medium`}>P2</button>
+                <button onClick={()=>setSelectedButton('3')} className={`${selectedButton == '3' ? "text-[#6366f1]" : "text-[#888888]"}  font-medium`}>P3</button>
               </div>
             </div>
 

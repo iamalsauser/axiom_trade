@@ -289,7 +289,6 @@ const ColumnSection: React.FC<ColumnSectionProps> = ({
   count,
   isNewPairs = false,
 }) => {
-  const [activeBtn, setActiveBtn] = useState<'P1' | 'P2' | 'P3'>('P1');
   return (
     <div className="flex-1 h-full flex flex-col overflow-hidden" style={{backgroundColor: '#101114'}}>
       {/* Column Header - Responsive */}
@@ -297,28 +296,26 @@ const ColumnSection: React.FC<ColumnSectionProps> = ({
         <div className="flex items-center space-x-2">
           <span className="text-white font-medium text-sm">{title}</span>
         </div>
-        <div className="flex items-center space-x-1">
-          <button
-            type="button"
-            className={`px-2 py-1 rounded text-xs font-medium focus:outline-none transition-colors ${activeBtn === 'P1' ? 'bg-[#3B82F6] text-white' : 'bg-[#23272b] text-[#9CA3AF]'}`}
-            onClick={() => setActiveBtn('P1')}
-          >
-            P1
-          </button>
-          <button
-            type="button"
-            className={`px-2 py-1 rounded text-xs font-medium focus:outline-none transition-colors ${activeBtn === 'P2' ? 'bg-[#3B82F6] text-white' : 'bg-[#23272b] text-[#9CA3AF]'}`}
-            onClick={() => setActiveBtn('P2')}
-          >
-            P2
-          </button>
-          <button
-            type="button"
-            className={`px-2 py-1 rounded text-xs font-medium focus:outline-none transition-colors ${activeBtn === 'P3' ? 'bg-[#3B82F6] text-white' : 'bg-[#23272b] text-[#9CA3AF]'}`}
-            onClick={() => setActiveBtn('P3')}
-          >
-            P3
-          </button>
+        
+        <div className="flex items-center space-x-3">
+          {/* Lightning bolt icon */}
+          <Zap className="w-4 h-4 text-[#F59E0B]" />
+          
+          {/* Count */}
+          <span className="text-[#9CA3AF] text-sm">{count}</span>
+          
+          {/* Menu icon */}
+          <BarChart3 className="w-4 h-4 text-[#9CA3AF]" />
+          
+          {/* P1 P2 P3 buttons */}
+          <div className="flex items-center space-x-1">
+            <span className="bg-[#3B82F6] text-white px-2 py-1 rounded text-xs font-medium">P1</span>
+            <span className="text-[#9CA3AF] px-1 py-1 text-xs">P2</span>
+            <span className="text-[#9CA3AF] px-1 py-1 text-xs">P3</span>
+          </div>
+          
+          {/* Sort icon */}
+          <ChevronUp className="w-4 h-4 text-[#9CA3AF]" />
         </div>
       </div>
       
