@@ -32,7 +32,7 @@ export default function PulsePage() {
       <header className="border-b border-[#2a2a2a] bg-[#0a0a0a] sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            {/* Logo and Navigation */}
+            {/* Logo and Navigation */}esfasfse
             <div className="flex items-center gap-8">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] rounded-lg flex items-center justify-center">
