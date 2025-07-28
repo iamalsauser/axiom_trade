@@ -1,3 +1,6 @@
+YouTube Link: https://youtu.be/HbNLlmVXc98?si=_Lok5XfhcCwh13AJ
+vercel link: axiom-trade-six.vercel.app
+
 axiom_pro
 
 A modern, real-time cryptocurrency trading interface built with Next.js, featuring live price updates, advanced filtering, and comprehensive token analytics.
