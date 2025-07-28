@@ -13,25 +13,16 @@ A modern, real-time cryptocurrency trading interface built with Next.js, featuri
 
 ## 📱 Screenshots
 
-### Desktop Layout
-![Desktop View](/placeholder.svg?height=800&width=1400&text=Desktop+Trading+Interface)
-*Full desktop experience with complete token table, filters, and trading controls*
+<img width="1440" height="811" alt="Screenshot 2025-07-28 at 1 23 43 PM" src="https://github.com/user-attachments/assets/08e2f8a3-a447-4f80-a076-321feca0f259" />
 
-### Tablet Layout
-![Tablet View](/placeholder.svg?height=600&width=1024&text=Tablet+Trading+Interface)
-*Optimized tablet layout with condensed navigation and responsive table*
+<img width="2880" height="1616" alt="image" src="https://github.com/user-attachments/assets/249d5e7d-b308-4064-b4b7-1180278f2586" />
 
-### Mobile Layout
-![Mobile View](/placeholder.svg?height=800&width=375&text=Mobile+Trading+Interface)
-*Mobile-first design with collapsible navigation and touch-optimized controls*
+<img width="453" height="632" alt="Screenshot 2025-07-28 at 1 24 12 PM" src="https://github.com/user-attachments/assets/b4a353db-5929-431a-b993-4755cdbd73ec" />
 
-### Trading Settings Modal
-![Trading Settings](/placeholder.svg?height=600&width=400&text=Trading+Settings+Modal)
-*Advanced trading configuration with preset management and MEV protection*
+<img width="378" height="705" alt="Screenshot 2025-07-28 at 1 24 40 PM" src="https://github.com/user-attachments/assets/92515aa2-90fb-4347-bf64-109b0ab5760e" />
 
-### Filters Modal
-![Filters Modal](/placeholder.svg?height=700&width=400&text=Advanced+Filters+Modal)
-*Comprehensive filtering system with protocol tags and audit criteria*
+<img width="385" height="379" alt="Screenshot 2025-07-28 at 1 25 04 PM" src="https://github.com/user-attachments/assets/dc1ab1bd-05e6-41ba-a4e2-e99f87eb997d" />
+
 
 ## 🛠️ Tech Stack
 
@@ -135,11 +126,7 @@ npm start
 - **Responsive design**: Adapts to different screen sizes
 - **Hover effects**: Interactive token logos with detailed overlays
 
-### Filters System
-- **Protocol filtering**: Filter by blockchain protocols
-- **Keyword search**: Include/exclude specific terms
-- **Audit metrics**: Filter by security scores and percentages
-- **MEV protection**: Configure transaction protection levels
+
 
 ### Trading Settings
 - **Preset management**: Save and switch between trading configurations
@@ -195,13 +182,7 @@ Update `hooks/use-token-data.ts` to modify the sample token data or connect to a
 2. Connect your repository to Vercel
 3. Deploy automatically with each push
 
-### Other Platforms
 
-The application can be deployed to any platform that supports Next.js:
-- Netlify
-- AWS Amplify
-- Railway
-- DigitalOcean App Platform
 
 ## 🤝 Contributing
 
@@ -211,9 +192,7 @@ The application can be deployed to any platform that supports Next.js:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🆘 Support
 
@@ -233,4 +212,4 @@ For support and questions:
 
 ---
 
-Built with ❤️ using Next.js and modern web technologies.
+Built within 48 hours ❤️
