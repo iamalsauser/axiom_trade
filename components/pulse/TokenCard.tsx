@@ -96,7 +96,7 @@ class MockWebSocket {
     this.interval = setInterval(() => {
       const mockData = this.generateMockData();
       this.callbacks.forEach(callback => callback(mockData));
-    }, 4000); // 4 seconds
+    }, 10000); // 10 seconds
   }
 
   private generateMockData() {
@@ -368,7 +368,15 @@ const SingleTokenComponent: React.FC<{ tokenData: TokenData; tokenId: string }> 
 };
 
 const TokenCard: React.FC<{ token: Token }> = ({ token }) => {
-  // Convert the old token format to the new TokenData format
+  // Assign a unique emoji logo to each token based on its id
+  const logoEmojis = [
+    "🪐", // Nebula
+    "⚛️", // Quantum
+    "🌈", // Aurora
+    "☀️", // Solstice
+    "🦄", "🐉", "🐼", "🦁", "🐧", "🐸", "🐢", "🦋", "🦉", "🦕", "🦖", "🐙", "🦑", "🦞", "🦀", "🦦", "🦥", "🦔"
+  ];
+  const logoEmoji = logoEmojis[parseInt(token.id, 10) % logoEmojis.length];
   const tokenData: TokenData = {
     name: token.name,
     subtitle: token.symbol,
@@ -376,8 +384,8 @@ const TokenCard: React.FC<{ token: Token }> = ({ token }) => {
     logo: {
       background: "bg-yellow-100",
       border: "",
-      emoji: "🦊",
-      badge: "��"
+      emoji: logoEmoji,
+      badge: "💥"
     },
     stats: {
       users: parseInt(token.holders) || 0,
