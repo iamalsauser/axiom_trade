@@ -1,4 +1,4 @@
-# Token Trading Table - AXIOM Pro
+axiom_pro
 
 A modern, real-time cryptocurrency trading interface built with Next.js, featuring live price updates, advanced filtering, and comprehensive token analytics.
 
