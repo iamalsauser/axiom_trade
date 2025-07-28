@@ -20,7 +20,7 @@ console.log("Header component mounted");
           <div className="flex items-center min-w-0 flex-1">
             {/* Logo and Brand */}
             <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0 select-none">
-            <img src="/images/axiom-logo.png" alt="AXIOM Logo" className="h-8 sm:h-10 w-auto object-contain" />
+            <img src="https://drive.google.com/uc?export=view&id=1GToTc9IMz5woVjqwX4YNl9AUYyX887p8" alt="AXIOM Logo" className="h-8 sm:h-10 w-auto object-contain" />
 
             </div>
 

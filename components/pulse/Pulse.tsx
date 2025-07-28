@@ -13,13 +13,14 @@ import {
 } from "lucide-react";
 import TokenCard from "./TokenCard";
 import NewPairsTokenCard from "./NewPairsTokenCard";
+import { motion, AnimatePresence } from "framer-motion";
 
 // --- Mock Tokens Data ---
 const mockTokens = [
   {
     id: 1,
-    name: "tiago",
-    symbol: "Lofi Girl's friend",
+    name: "Nebula",
+    symbol: "NEB",
     age: "16",
     marketCap: 5000,
     price: 2000,
@@ -31,8 +32,8 @@ const mockTokens = [
   },
   {
     id: 2,
-    name: "Viper",
-    symbol: "Viper",
+    name: "Quantum",
+    symbol: "QTM",
     age: "8",
     marketCap: 5000,
     price: 0,
@@ -44,8 +45,8 @@ const mockTokens = [
   },
   {
     id: 3,
-    name: "priceless",
-    symbol: "Mona Lisa",
+    name: "Aurora",
+    symbol: "AUR",
     age: "14",
     marketCap: 5000,
     price: 134,
@@ -57,8 +58,8 @@ const mockTokens = [
   },
   {
     id: 4,
-    name: "TRUTHF",
-    symbol: "Truth Fiasco",
+    name: "Solstice",
+    symbol: "SOL",
     age: "14",
     marketCap: 5000,
     price: 1,
@@ -177,19 +178,21 @@ const OldTokenCard: React.FC<{ token: EnhancedToken }> = ({ token }) => {
   const [priceDirection, setPriceDirection] = useState<'up' | 'down' | null>(null);
 
   useEffect(() => {
+    let price = token.price;
     const interval = setInterval(() => {
       const change = (Math.random() - 0.5) * 0.05;
-      const newPrice = Math.max(1, currentPrice * (1 + change));
-      if (newPrice > currentPrice) {
+      const newPrice = Math.max(1, price * (1 + change));
+      if (newPrice > price) {
         setPriceDirection('up');
-      } else if (newPrice < currentPrice) {
+      } else if (newPrice < price) {
         setPriceDirection('down');
       }
       setCurrentPrice(newPrice);
+      price = newPrice;
       setTimeout(() => setPriceDirection(null), 500);
-    }, 3000 + Math.random() * 4000);
+    }, 10000 + Math.random() * 5000); // 10–15 seconds
     return () => clearInterval(interval);
-  }, [currentPrice]);
+  }, [token.price]);
 
   const getBadgeColor = (change: number): string => {
     if (change > 0) return 'bg-green-600/20 text-green-400';
@@ -329,48 +332,54 @@ const ColumnSection: React.FC<ColumnSectionProps> = ({
           display: 'flex',
           flexDirection: 'column'
         }}>
-          {tokens.map((token) => (
-            <div key={token.id} style={{
-              minHeight: '120px',
-              maxHeight: '200px',
-              marginBottom: '30px'
-            }}>
-              {isNewPairs ? 
-                <NewPairsTokenCard token={{
-                  id: token.id.toString(),
-                  name: token.name,
-                  symbol: token.symbol,
-                  age: token.age,
-                  marketCap: token.marketCap.toString(),
-                  price: token.price.toString(),
-                  volume24h: token.volume24h.toString(),
-                  transactions24h: token.transactions24h.toString(),
-                  priceChange24h: token.priceChange24h.toString(),
-                  image: token.image,
-                  holders: token.holders.toString(),
-                  buys: token.buys.toString(),
-                  sells: token.sells.toString(),
-                  creator: token.creator
-                }} /> :
-                <TokenCard token={{
-                  id: token.id.toString(),
-                  name: token.name,
-                  symbol: token.symbol,
-                  age: token.age,
-                  marketCap: token.marketCap.toString(),
-                  price: token.price.toString(),
-                  volume24h: token.volume24h.toString(),
-                  transactions24h: token.transactions24h.toString(),
-                  priceChange24h: token.priceChange24h.toString(),
-                  image: token.image,
-                  holders: token.holders.toString(),
-                  buys: token.buys.toString(),
-                  sells: token.sells.toString(),
-                  creator: token.creator
-                }} />
-              }
-            </div>
-          ))}
+          <AnimatePresence>
+            {tokens.map((token) => (
+              <motion.div
+                key={token.id}
+                layout
+                style={{
+                  minHeight: '120px',
+                  maxHeight: '200px',
+                  marginBottom: '30px'
+                }}
+              >
+                {isNewPairs ? 
+                  <NewPairsTokenCard token={{
+                    id: token.id.toString(),
+                    name: token.name,
+                    symbol: token.symbol,
+                    age: token.age,
+                    marketCap: token.marketCap.toString(),
+                    price: token.price.toString(),
+                    volume24h: token.volume24h.toString(),
+                    transactions24h: token.transactions24h.toString(),
+                    priceChange24h: token.priceChange24h.toString(),
+                    image: token.image,
+                    holders: token.holders.toString(),
+                    buys: token.buys.toString(),
+                    sells: token.sells.toString(),
+                    creator: token.creator
+                  }} /> :
+                  <TokenCard token={{
+                    id: token.id.toString(),
+                    name: token.name,
+                    symbol: token.symbol,
+                    age: token.age,
+                    marketCap: token.marketCap.toString(),
+                    price: token.price.toString(),
+                    volume24h: token.volume24h.toString(),
+                    transactions24h: token.transactions24h.toString(),
+                    priceChange24h: token.priceChange24h.toString(),
+                    image: token.image,
+                    holders: token.holders.toString(),
+                    buys: token.buys.toString(),
+                    sells: token.sells.toString(),
+                    creator: token.creator
+                  }} />
+                }
+              </motion.div>
+            ))}
+          </AnimatePresence>
           {tokens.length === 0 && (
             <div className="text-center py-8 text-[#9CA3AF] flex-1 flex items-center justify-center">
               No tokens in this category
@@ -391,10 +400,12 @@ const Main: React.FC = () => {
       token.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       token.symbol.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    // Sort by price descending for each category
+    const sortByPriceDesc = (arr: EnhancedToken[]) => [...arr].sort((a, b) => b.price - a.price);
     return {
-      new: filtered.filter(token => token.category === 'new'),
-      final: filtered.filter(token => token.category === 'final'),
-      migrated: filtered.filter(token => token.category === 'migrated')
+      new: sortByPriceDesc(filtered.filter(token => token.category === 'new')),
+      final: sortByPriceDesc(filtered.filter(token => token.category === 'final')),
+      migrated: sortByPriceDesc(filtered.filter(token => token.category === 'migrated'))
     };
   }, [enhancedTokens, searchTerm]);
   

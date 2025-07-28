@@ -94,7 +94,7 @@ class MockWebSocket {
 
   private startUpdates() {
     this.interval = setInterval(() => {
-      const updateInterval = Math.random() * 3000 + 2000; // 2-5 seconds
+      const updateInterval = Math.random() * 4000 + 8000; // 8-12 seconds
       setTimeout(() => {
         const mockData = this.generateMockData();
         this.callbacks.forEach(callback => callback(mockData));
@@ -291,24 +291,24 @@ const SingleTokenComponent: React.FC<{ tokenData: TokenData; tokenId: string }> 
               {/* Action Icons */}
               <div className="flex items-center flex-wrap gap-1 text-xs mb-3">
                 <span className="text-green-400 transition-all duration-300">{localTokenData.timeago}</span>
-                {localTokenData.icons.pen && <span className="text-gray-400">🖊️</span>}
-                {localTokenData.icons.globe && <span className="text-gray-400">🌐</span>}
-                {localTokenData.icons.telegram && <span className="text-gray-400">📢</span>}
-                {localTokenData.icons.search && <span className="text-gray-400">🔍</span>}
-                <span className="text-gray-400 transition-all duration-300">👥{localTokenData.stats.users}</span>
-                <span className="text-gray-400 transition-all duration-300">📊{localTokenData.stats.charts}</span>
-                <span className="text-gray-400 transition-all duration-300">🏆{localTokenData.stats.trophies}</span>
+                {localTokenData.icons.pen && <span className="text-gray-400">✏️</span>}
+                {localTokenData.icons.globe && <span className="text-gray-400">🛰️</span>}
+                {localTokenData.icons.telegram && <span className="text-gray-400">📣</span>}
+                {localTokenData.icons.search && <span className="text-gray-400">🕵️‍♂️</span>}
+                <span className="text-gray-400 transition-all duration-300">🧑‍💻{localTokenData.stats.users}</span>
+                <span className="text-gray-400 transition-all duration-300">📈{localTokenData.stats.charts}</span>
+                <span className="text-gray-400 transition-all duration-300">🥇{localTokenData.stats.trophies}</span>
                 <span className="text-gray-400 transition-all duration-300">👑{localTokenData.stats.crowns}</span>
               </div>
               
               {/* Bottom Percentages - Moved Lower */}
               <div className="flex items-center flex-wrap gap-1 text-xs mt-2">
                 <span className={`${localTokenData.percentages.user.color} flex items-center space-x-1 transition-all duration-300`}>
-                  <span>👤</span>
+                  <span>🦸</span>
                   <span>{localTokenData.percentages.user.value}</span>
                 </span>
                 <span className={`${localTokenData.percentages.ghost.color} flex items-center space-x-1 transition-all duration-300`}>
-                  <span>👻</span>
+                  <span>👽</span>
                   <span>{localTokenData.percentages.ghost.value}</span>
                   {localTokenData.percentages.ghost.time && <span>{localTokenData.percentages.ghost.time}</span>}
                 </span>
@@ -317,11 +317,11 @@ const SingleTokenComponent: React.FC<{ tokenData: TokenData; tokenId: string }> 
                   <span>{localTokenData.percentages.target.value}</span>
                 </span>
                 <span className={`${localTokenData.percentages.lock.color} flex items-center space-x-1 transition-all duration-300`}>
-                  <span>🔒</span>
+                  <span>🛡️</span>
                   <span>{localTokenData.percentages.lock.value}</span>
                 </span>
                 <span className={`${localTokenData.percentages.warning.color} flex items-center space-x-1 transition-all duration-300`}>
-                  <span>⚠️</span>
+                  <span>🚨</span>
                   <span>{localTokenData.percentages.warning.value}</span>
                 </span>
               </div>
@@ -379,8 +379,8 @@ const TokenCard: React.FC<{ token: Token }> = ({ token }) => {
     logo: {
       background: "bg-yellow-100",
       border: "",
-      emoji: "🐱",
-      badge: "🔥"
+      emoji: "🦊",
+      badge: "��"
     },
     stats: {
       users: parseInt(token.holders) || 0,
