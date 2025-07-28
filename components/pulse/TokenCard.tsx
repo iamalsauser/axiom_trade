@@ -94,12 +94,9 @@ class MockWebSocket {
 
   private startUpdates() {
     this.interval = setInterval(() => {
-      const updateInterval = Math.random() * 4000 + 8000; // 8-12 seconds
-      setTimeout(() => {
-        const mockData = this.generateMockData();
-        this.callbacks.forEach(callback => callback(mockData));
-      }, updateInterval);
-    }, 100);
+      const mockData = this.generateMockData();
+      this.callbacks.forEach(callback => callback(mockData));
+    }, 4000); // 4 seconds
   }
 
   private generateMockData() {
