@@ -1,218 +1,322 @@
-YouTube Link: https://youtu.be/HbNLlmVXc98?si=_Lok5XfhcCwh13AJ
-vercel link: axiom-trade-six.vercel.app
-
-axiom_pro
+# Axiom Pro
 
 A modern, real-time cryptocurrency trading interface built with Next.js, featuring live price updates, advanced filtering, and comprehensive token analytics.
 
-## 🚀 Features
+## 🔗 Live Demo
 
-- **Real-time Price Updates**: Live WebSocket-powered price feeds with smooth animations
+- **🌐 Live Application**: [axiom-trade-six.vercel.app](https://axiom-trade-six.vercel.app)
+- **📺 Demo Video**: [Watch on YouTube](https://youtu.be/HbNLlmVXc98?si=_Lok5XfhcCwh13AJ)
+
+## ✨ Key Features
+
+### Real-Time Trading Interface
+- **Live Price Updates**: WebSocket-powered price feeds with smooth animations
+- **Interactive Token Table**: Sortable columns with hover effects and detailed overlays
 - **Advanced Filtering**: Multi-criteria filtering with protocol tags, keywords, and audit metrics
-- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
 - **Trading Settings**: Configurable presets for buy/sell parameters, MEV protection, and RPC endpoints
+
+### Analytics & Insights
 - **Token Analytics**: Comprehensive audit scores, transaction data, and market metrics
+- **Market Data**: Real-time market cap, volume, and price change indicators
+- **Audit Integration**: Token safety scores and verification badges
+
+### User Experience
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
 - **Dark Theme**: Professional dark UI optimized for trading environments
+- **Performance Optimized**: Built with Next.js 14 and modern React patterns
+
+## 🛠️ Technology Stack
+
+| Category | Technology |
+|----------|------------|
+| **Framework** | Next.js 14 (App Router) |
+| **Styling** | Tailwind CSS |
+| **UI Components** | shadcn/ui |
+| **Icons** | Lucide React |
+| **Language** | TypeScript (Full type safety) |
+| **Real-time** | WebSocket mock service |
+| **State Management** | React Hooks |
 
 ## 📱 Screenshots
 
-<img width="1440" height="811" alt="Screenshot 2025-07-28 at 1 23 43 PM" src="https://github.com/user-attachments/assets/08e2f8a3-a447-4f80-a076-321feca0f259" />
+### Desktop Interface
+<img width="1440" height="811" alt="Desktop Trading Interface" src="https://github.com/user-attachments/assets/08e2f8a3-a447-4f80-a076-321feca0f259" />
 
-<img width="2880" height="1616" alt="image" src="https://github.com/user-attachments/assets/249d5e7d-b308-4064-b4b7-1180278f2586" />
+### Responsive Design
+<img width="2880" height="1616" alt="Responsive Layout" src="https://github.com/user-attachments/assets/249d5e7d-b308-4064-b4b7-1180278f2586" />
 
-<img width="453" height="632" alt="Screenshot 2025-07-28 at 1 24 12 PM" src="https://github.com/user-attachments/assets/b4a353db-5929-431a-b993-4755cdbd73ec" />
+### Mobile Views
+<img width="453" height="632" alt="Mobile Interface" src="https://github.com/user-attachments/assets/b4a353db-5929-431a-b993-4755cdbd73ec" />
 
-<img width="378" height="705" alt="Screenshot 2025-07-28 at 1 24 40 PM" src="https://github.com/user-attachments/assets/92515aa2-90fb-4347-bf64-109b0ab5760e" />
+<img width="378" height="705" alt="Mobile Menu" src="https://github.com/user-attachments/assets/92515aa2-90fb-4347-bf64-109b0ab5760e" />
 
-<img width="385" height="379" alt="Screenshot 2025-07-28 at 1 25 04 PM" src="https://github.com/user-attachments/assets/dc1ab1bd-05e6-41ba-a4e2-e99f87eb997d" />
+### Trading Settings
+<img width="385" height="379" alt="Trading Settings Modal" src="https://github.com/user-attachments/assets/dc1ab1bd-05e6-41ba-a4e2-e99f87eb997d" />
 
-
-## 🛠️ Tech Stack
-
-- **Framework**: Next.js 14 (App Router)
-- **Styling**: Tailwind CSS
-- **UI Components**: shadcn/ui
-- **Icons**: Lucide React
-- **TypeScript**: Full type safety
-- **Real-time**: WebSocket mock service
-- **State Management**: React Hooks
-
-## 📦 Installation
+## 🚀 Quick Start
 
 ### Prerequisites
-
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn package manager
 
-### Setup Instructions
+### Installation
 
 1. **Clone the repository**
-   \`\`\`bash
+   ```bash
    git clone <repository-url>
-   cd token-trading-table
-   \`\`\`
+   cd axiom-pro
+   ```
 
 2. **Install dependencies**
-   \`\`\`bash
+   ```bash
    npm install
    # or
    yarn install
-   \`\`\`
+   ```
 
-3. **Run the development server**
-   \`\`\`bash
+3. **Start development server**
+   ```bash
    npm run dev
    # or
    yarn dev
-   \`\`\`
+   ```
 
-4. **Open your browser**
+4. **Open application**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
-### Build for Production
+### Production Build
 
-\`\`\`bash
+```bash
 npm run build
 npm start
-\`\`\`
+```
 
-## 🏗️ Project Structure
+## 🏗️ Project Architecture
 
-\`\`\`
-├── app/
-│   ├── globals.css          # Global styles and animations
-│   ├── layout.tsx           # Root layout component
-│   └── page.tsx             # Main application entry
-├── components/
-│   ├── atoms/               # Basic UI components
-│   │   ├── audit-badge.tsx
-│   │   ├── price-change.tsx
-│   │   ├── token-badges.tsx
-│   │   ├── token-logo.tsx
-│   │   └── trend-indicator.tsx
-│   ├── molecules/           # Composite components
-│   │   ├── action-button.tsx
-│   │   ├── action-menu.tsx
-│   │   ├── audit-cell.tsx
-│   │   ├── market-cap-cell.tsx
-│   │   ├── token-info.tsx
-│   │   ├── transaction-cell.tsx
-│   │   └── volume-cell.tsx
-│   ├── organisms/           # Complex components
-│   │   ├── filters-modal.tsx
-│   │   ├── footer.tsx
-│   │   ├── header.tsx
-│   │   ├── sub-navigation.tsx
-│   │   ├── table-row.tsx
-│   │   ├── token-table.tsx
-│   │   └── trading-settings-modal.tsx
-│   └── templates/           # Page templates
-│       ├── discover-page.tsx
-│       └── pump-live-page.tsx
-├── hooks/
-│   └── use-token-data.ts    # Custom hook for token data management
-├── lib/
-│   └── utils.ts             # Utility functions
-├── services/
-│   └── websocket-mock.ts    # Mock WebSocket service
-├── types/
-│   └── token.ts             # TypeScript type definitions
-└── public/
-    └── images/              # Static assets
-\`\`\`
+The project follows atomic design principles for scalable component architecture:
 
-## 🎯 Key Components
+| Directory/File | Type | Component Level | Description |
+|----------------|------|-----------------|-------------|
+| **app/** | Directory | - | Next.js app directory |
+| ├── globals.css | File | - | Global styles and animations |
+| ├── layout.tsx | File | - | Root layout component |
+| └── page.tsx | File | - | Main application entry |
+| **components/** | Directory | - | React components organized by atomic design |
+| ├── **atoms/** | Directory | Atomic | Basic UI components |
+| │   ├── audit-badge.tsx | Component | Atomic | Audit status badge component |
+| │   ├── price-change.tsx | Component | Atomic | Price change indicator |
+| │   ├── token-badges.tsx | Component | Atomic | Token status badges |
+| │   ├── token-logo.tsx | Component | Atomic | Token logo display |
+| │   └── trend-indicator.tsx | Component | Atomic | Trend direction indicator |
+| ├── **molecules/** | Directory | Molecular | Composite components |
+| │   ├── action-button.tsx | Component | Molecular | Interactive action button |
+| │   ├── action-menu.tsx | Component | Molecular | Dropdown action menu |
+| │   ├── audit-cell.tsx | Component | Molecular | Table cell for audit info |
+| │   ├── market-cap-cell.tsx | Component | Molecular | Market cap display cell |
+| │   ├── token-info.tsx | Component | Molecular | Token information display |
+| │   ├── transaction-cell.tsx | Component | Molecular | Transaction data cell |
+| │   └── volume-cell.tsx | Component | Molecular | Volume data cell |
+| ├── **organisms/** | Directory | Organism | Complex components |
+| │   ├── filters-modal.tsx | Component | Organism | Filtering modal dialog |
+| │   ├── footer.tsx | Component | Organism | Application footer |
+| │   ├── header.tsx | Component | Organism | Application header |
+| │   ├── sub-navigation.tsx | Component | Organism | Secondary navigation |
+| │   ├── table-row.tsx | Component | Organism | Complete table row |
+| │   ├── token-table.tsx | Component | Organism | Main token data table |
+| │   └── trading-settings-modal.tsx | Component | Organism | Trading configuration modal |
+| └── **templates/** | Directory | Template | Page templates |
+|     ├── discover-page.tsx | Template | Template | Discovery page layout |
+|     └── pump-live-page.tsx | Template | Template | Live pump tracking page |
+| **hooks/** | Directory | - | Custom React hooks |
+| └── use-token-data.ts | Hook | - | Token data management hook |
+| **lib/** | Directory | - | Utility libraries |
+| └── utils.ts | File | - | Utility functions |
+| **services/** | Directory | - | External service integrations |
+| └── websocket-mock.ts | Service | - | Mock WebSocket service |
+| **types/** | Directory | - | TypeScript definitions |
+| └── token.ts | Types | - | Token-related type definitions |
+| **public/** | Directory | - | Static assets |
+| └── **images/** | Directory | - | Image assets |
 
-### Token Table
-- **Real-time updates**: Live price feeds with visual indicators
-- **Sortable columns**: Click headers to sort by any metric
-- **Responsive design**: Adapts to different screen sizes
-- **Hover effects**: Interactive token logos with detailed overlays
+### Component Architecture Summary
 
+| Level | Count | Purpose |
+|-------|-------|---------|
+| **Atoms** | 5 | Basic, reusable UI elements |
+| **Molecules** | 7 | Combinations of atoms with specific functionality |
+| **Organisms** | 7 | Complex components combining molecules and atoms |
+| **Templates** | 2 | Page-level layouts and structures |
 
+## 🎯 Core Components
 
-### Trading Settings
-- **Preset management**: Save and switch between trading configurations
-- **Buy/Sell settings**: Separate parameters for different transaction types
-- **Fee configuration**: Auto-fee calculation with maximum limits
-- **RPC endpoints**: Custom blockchain connection settings
+### Token Table Features
+- Real-time price updates with visual change indicators
+- Sortable columns for all metrics
+- Responsive table design with mobile optimization
+- Interactive token logos with detailed hover overlays
+- Advanced filtering and search capabilities
 
-## 🔧 Configuration
+### Trading Settings Modal
+- Preset management for quick configuration switching
+- Separate buy/sell parameter controls
+- Auto-fee calculation with configurable limits
+- Custom RPC endpoint configuration
+- MEV protection settings
+
+### Filter System
+- Protocol-based filtering
+- Keyword search across token names and symbols
+- Audit score filtering
+- Market cap and volume range filters
+- Real-time filter application
+
+## ⚙️ Configuration
 
 ### Environment Variables
 
-Create a `.env.local` file in the root directory:
+Create a `.env.local` file:
 
-\`\`\`env
-# Add any required environment variables here
+```env
+# API Configuration
 NEXT_PUBLIC_API_URL=your_api_url
 NEXT_PUBLIC_WS_URL=your_websocket_url
-\`\`\`
 
-### Customization
+# Trading Configuration
+NEXT_PUBLIC_DEFAULT_SLIPPAGE=0.5
+NEXT_PUBLIC_MAX_FEE_LIMIT=0.02
+```
 
-#### Colors and Theming
-Edit `tailwind.config.ts` to customize the color scheme:
+### Customization Options
 
-\`\`\`typescript
+#### Theme Customization
+Update `tailwind.config.ts`:
+
+```typescript
 theme: {
   extend: {
     colors: {
-      // Customize your color palette
       primary: "#6366f1",
       success: "#00ff88",
       danger: "#ff4444",
-      // ... more colors
+      warning: "#fbbf24",
+      // Add custom trading colors
+      "price-up": "#00ff88",
+      "price-down": "#ff4444",
+      "price-neutral": "#64748b"
     }
   }
 }
-\`\`\`
+```
 
-#### Mock Data
-Update `hooks/use-token-data.ts` to modify the sample token data or connect to a real API.
+#### Data Source Integration
+Modify `hooks/use-token-data.ts` to connect to real APIs:
 
-## 📱 Responsive Breakpoints
+```typescript
+// Replace mock data with real API calls
+const fetchTokenData = async () => {
+  const response = await fetch('/api/tokens');
+  return response.json();
+};
+```
 
-- **Mobile**: < 640px (sm)
-- **Tablet**: 640px - 1024px (md/lg)
-- **Desktop**: > 1024px (xl)
+## 📱 Responsive Design
+
+### Breakpoint Strategy
+
+| Device | Breakpoint | Optimizations |
+|--------|------------|---------------|
+| **Mobile** | < 640px | Simplified table, collapsible filters |
+| **Tablet** | 640px - 1024px | Condensed columns, touch-friendly controls |
+| **Desktop** | > 1024px | Full feature set, multi-column layout |
+
+### Mobile Optimizations
+- Horizontal scrolling for table content
+- Collapsible filter panel
+- Touch-optimized button sizes
+- Simplified navigation menu
 
 ## 🚀 Deployment
 
-### Vercel (Recommended)
+### Vercel Deployment (Recommended)
 
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Deploy automatically with each push
+1. **Connect Repository**
+   - Push code to GitHub
+   - Import project in Vercel dashboard
 
+2. **Configure Build Settings**
+   ```bash
+   # Build Command
+   npm run build
+   
+   # Output Directory
+   .next
+   ```
 
+3. **Environment Variables**
+   - Add production environment variables in Vercel dashboard
+
+### Alternative Deployment Options
+
+#### Docker Deployment
+```dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+#### Static Export
+```bash
+npm run build
+npm run export
+```
+
+## 🔧 Development Guidelines
+
+### Code Organization
+- Follow atomic design principles
+- Use TypeScript for type safety
+- Implement proper error boundaries
+- Write unit tests for core components
+
+### Performance Best Practices
+- Implement proper React memoization
+- Use lazy loading for large components
+- Optimize WebSocket connections
+- Minimize bundle size with code splitting
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+### Development Workflow
 
+1. **Fork & Clone**
+   ```bash
+   git clone https://github.com/your-username/axiom-pro.git
+   cd axiom-pro
+   ```
 
+2. **Create Feature Branch**
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
 
-## 🆘 Support
+3. **Development**
+   - Follow existing code patterns
+   - Add tests for new features
+   - Update documentation
 
-For support and questions:
-- Create an issue in the GitHub repository
-- Check the documentation in the `/docs` folder
-- Review the component examples in `/components`
+4. **Submit PR**
+   ```bash
+   git commit -m 'Add amazing feature'
+   git push origin feature/amazing-feature
+   ```
 
-## 🔮 Roadmap
-
-- [ ] Real WebSocket integration
-- [ ] User authentication
-- [ ] Portfolio tracking
-- [ ] Advanced charting
-- [ ] Mobile app version
-- [ ] Multi-language support
-
----
-
-Built within 48 hours ❤️
+### Code Standards
+- Use TypeScript for all new code
+- Follow ESLint and Prettier configurations
+- Write meaningful commit messages
+- Include tests for new features
